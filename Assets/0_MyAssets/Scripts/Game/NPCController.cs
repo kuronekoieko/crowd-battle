@@ -17,7 +17,7 @@ public class NPCController : MonoBehaviour
     float walkSpeed = 1f;
     float timeLimit;
     public NPCState nPCState { get; private set; }
-    NavMeshAgent agent;
+
     Transform targetTF;
     Charactor charactor;
     public void OnStart()
@@ -27,11 +27,12 @@ public class NPCController : MonoBehaviour
         int z = Random.Range(-10, 10);
         walkVec = new Vector3(x, 0, z);
         timeLimit = Random.Range(1, 6);
-        agent = GetComponent<NavMeshAgent>();
+
         nPCState = NPCState.Wandering;
         charactor = GetComponent<Charactor>();
+        charactor.OnStart();
         charactor.skinnedMeshRenderer.material.color = Color.white;
-        agent.speed = 10;
+        //charactor.agent.speed = 10;
     }
 
     public void OnUpdate()
@@ -52,7 +53,7 @@ public class NPCController : MonoBehaviour
     void Following()
     {
         if (targetTF == null) { return; }
-        agent.SetDestination(targetTF.position);
+        charactor.agent.SetDestination(targetTF.position);
     }
 
     void Wandering()

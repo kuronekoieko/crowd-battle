@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         charactor = GetComponent<Charactor>();
-        //charactor.EnableScript();
+        charactor.OnStart();
+        charactor.agent.enabled = false;
     }
 
     public void OnUpdate()
@@ -65,9 +66,9 @@ public class PlayerController : MonoBehaviour
         return Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
     }
 
-    void OnCollisionEnter(Collision col)
+    void OnTriggerEnter(Collider other)
     {
-        var npc = col.gameObject.GetComponent<NPCController>();
+        var npc = other.gameObject.GetComponent<NPCController>();
         if (npc == null) { return; }
         npc.SetTarget(targetTF: transform);
     }

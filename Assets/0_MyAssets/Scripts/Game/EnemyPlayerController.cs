@@ -12,7 +12,9 @@ public class EnemyPlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         charactor = GetComponent<Charactor>();
+        charactor.OnStart();
         charactor.skinnedMeshRenderer.material.color = Color.red;
+        charactor.agent.enabled = false;
     }
 
     public void OnUpdate()
@@ -40,9 +42,9 @@ public class EnemyPlayerController : MonoBehaviour
         return Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
     }
 
-    void OnCollisionEnter(Collision col)
+    void OnTriggerEnter(Collider other)
     {
-        var npc = col.gameObject.GetComponent<NPCController>();
+        var npc = other.gameObject.GetComponent<NPCController>();
         if (npc == null) { return; }
         npc.SetTarget(targetTF: transform);
     }
