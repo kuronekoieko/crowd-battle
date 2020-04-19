@@ -5,5 +5,6 @@ using UnityEngine;
 public class Charactor : MonoBehaviour
 {
     [SerializeField] Animator animator;
+    public SkinnedMeshRenderer skinnedMeshRenderer;
 
 }

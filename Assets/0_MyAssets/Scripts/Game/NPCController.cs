@@ -30,7 +30,8 @@ public class NPCController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         nPCState = NPCState.Wandering;
         charactor = GetComponent<Charactor>();
-
+        charactor.skinnedMeshRenderer.material.color = Color.white;
+        agent.speed = 10;
     }
 
     public void OnUpdate()
@@ -83,7 +84,6 @@ public class NPCController : MonoBehaviour
         if (nPCState == NPCState.Following) { return; }
         this.targetTF = targetTF;
         nPCState = NPCState.Following;
-        Debug.Log(name);
         rb.isKinematic = true;
     }
 }

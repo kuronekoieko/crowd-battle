@@ -13,13 +13,27 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform fieldCornerLL;
     [SerializeField] Charactor charactorPrefab;
     NPCController[] nPCControllers;
+    EnemyPlayerController[] enemyPlayerControllers;
     PlayerController _playerController;
     void Start()
     {
         _playerController = player.gameObject.AddComponent<PlayerController>();
         _playerController.OnStart();
         _cameraController.OnStart(_playerController.transform.position);
-        WanderingGenerator();
+        NPCGenerator();
+        EnemyGenerator();
+    }
+
+    void EnemyGenerator()
+    {
+        enemyPlayerControllers = new EnemyPlayerController[8];
+        for (int i = 0; i < enemyPlayerControllers.Length; i++)
+        {
+            Vector3 pos = GetRandomPos();
+            var charactor = Instantiate(charactorPrefab, pos, Quaternion.identity, transform);
+            enemyPlayerControllers[i] = charactor.gameObject.AddComponent<EnemyPlayerController>();
+            enemyPlayerControllers[i].OnStart();
+        }
     }
 
     void FixedUpdate()
@@ -32,7 +46,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void WanderingGenerator()
+    void NPCGenerator()
     {
         nPCControllers = new NPCController[100];
         for (int i = 0; i < nPCControllers.Length; i++)

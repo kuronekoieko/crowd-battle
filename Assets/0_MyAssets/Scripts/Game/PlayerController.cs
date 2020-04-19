@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
         transform.eulerAngles = new Vector3(0, degree, 0);
         Vector3 vel = walkVec.normalized * walkSpeed;
         //落下しなくなるため、上に飛ばないようにする
-        if (rb.velocity.y < 0) vel.y = rb.velocity.y;
+        //if (rb.velocity.y < 0) vel.y = rb.velocity.y;
         rb.velocity = vel;
     }
 

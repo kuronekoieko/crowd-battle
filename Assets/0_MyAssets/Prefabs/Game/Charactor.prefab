@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 9218734470970619949}
+  skinnedMeshRenderer: {fileID: 9218734470966527725}
 --- !u!195 &3061101700530801233
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -183,6 +184,12 @@ Transform:
 --- !u!95 &9218734470970619949 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8592876449711865404, guid: 6b5d591dbb72ac04a80d42bbb710cb7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 625861475054847505}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &9218734470966527725 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8592876449707639036, guid: 6b5d591dbb72ac04a80d42bbb710cb7a,
     type: 3}
   m_PrefabInstance: {fileID: 625861475054847505}
   m_PrefabAsset: {fileID: 0}
