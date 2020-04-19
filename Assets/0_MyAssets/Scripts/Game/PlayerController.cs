@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             mouseDownPos = Input.mousePosition;
-            animator.SetTrigger("Run");
+            //animator.SetTrigger("Run");
         }
 
         if (Input.GetMouseButton(0))
