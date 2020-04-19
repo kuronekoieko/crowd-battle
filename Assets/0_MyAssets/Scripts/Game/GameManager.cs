@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform fieldCornerUR;
     [SerializeField] Transform fieldCornerLL;
     [SerializeField] Charactor charactorPrefab;
-    Charactor[] wanderingPlayers;
+    NPCController[] nPCControllers;
 
     void Start()
     {
@@ -25,16 +25,20 @@ public class GameManager : MonoBehaviour
     {
         _playerController.OnUpdate();
         _cameraController.FollowTarget(_playerController.transform.position);
+        for (int i = 0; i < nPCControllers.Length; i++)
+        {
+            nPCControllers[i].OnUpdate();
+        }
     }
 
     void WanderingGenerator()
     {
-        wanderingPlayers = new Charactor[100];
-        for (int i = 0; i < wanderingPlayers.Length; i++)
+        nPCControllers = new NPCController[1000];
+        for (int i = 0; i < nPCControllers.Length; i++)
         {
             Vector3 pos = GetRandomPos();
-            wanderingPlayers[i] = Instantiate(charactorPrefab, pos, Quaternion.identity, transform);
-            wanderingPlayers[i].OnStart(charactorType: CharactorType.Wandering);
+            nPCControllers[i] = Instantiate(charactorPrefab, pos, Quaternion.identity, transform).GetComponent<NPCController>();
+            nPCControllers[i].OnStart();
         }
     }
 
