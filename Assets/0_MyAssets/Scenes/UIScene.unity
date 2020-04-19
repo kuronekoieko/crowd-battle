@@ -225,6 +225,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 42070732}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &42070734 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198617934630346986, guid: 211df3921ba166e4d97f049834dc5490,
+    type: 3}
+  m_PrefabInstance: {fileID: 42070732}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &441927704
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,6 +482,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338c5a27f702641d1bbe129dc22433c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  confettiL: {fileID: 42070734}
+  confettiR: {fileID: 759695604}
 --- !u!1001 &759695602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -574,6 +582,12 @@ PrefabInstance:
 --- !u!4 &759695603 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4973469075793816, guid: 211df3921ba166e4d97f049834dc5490,
+    type: 3}
+  m_PrefabInstance: {fileID: 759695602}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &759695604 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198617934630346986, guid: 211df3921ba166e4d97f049834dc5490,
     type: 3}
   m_PrefabInstance: {fileID: 759695602}
   m_PrefabAsset: {fileID: 0}
@@ -3262,6 +3276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextButton: {fileID: 4267557496681251673}
+  uICameraController: {fileID: 534669906}
 --- !u!224 &7976196766605606304
 RectTransform:
   m_ObjectHideFlags: 0
