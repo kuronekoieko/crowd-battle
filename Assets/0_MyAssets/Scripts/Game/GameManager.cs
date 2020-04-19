@@ -7,18 +7,17 @@ using UnityEngine;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-    public void OnStart()
+    [SerializeField] PlayerController _playerController;
+    [SerializeField] CameraController _cameraController;
+    void Start()
     {
-
+        _playerController.OnStart();
+        _cameraController.OnStart(_playerController.transform.position);
     }
 
-    public void OnInitialize()
+    void FixedUpdate()
     {
 
-    }
-
-    public void OnUpdate()
-    {
-
+        _cameraController.FollowTarget(_playerController.transform.position);
     }
 }

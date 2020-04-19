@@ -2,6 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum PlayerType
+{
+    Player,
+    EnemyPlayer,
+    Wandering,
+    Following,
+}
+
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] Animator animator;
@@ -10,7 +19,7 @@ public class PlayerController : MonoBehaviour
     Vector3 mouseDownPos;
     Rigidbody rb;
 
-    void Start()
+    public void OnStart()
     {
         rb = GetComponent<Rigidbody>();
     }

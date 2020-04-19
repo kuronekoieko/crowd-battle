@@ -8,37 +8,41 @@ using UnityEngine;
 /// </summary>
 public class CameraController : MonoBehaviour
 {
-    void Awake()
+
+    Vector3 vecFromPlayerToCamera;
+    public void OnStart(Vector3 playerPos)
     {
-        // 開発している画面を元に縦横比取得 (縦画面) iPhoneXS MAXサイズ
-        float developAspect = 1242.0f / 2688.0f;
-        // 横画面で開発している場合は以下の用に切り替えます
-        // float developAspect = 1334.0f / 750.0f;
-
-        // 実機のサイズを取得して、縦横比取得
-        float deviceAspect = (float)Screen.width / (float)Screen.height;
-
-        // 実機と開発画面との対比
-        float scale = deviceAspect / developAspect;
-
-        Camera mainCamera = Camera.main;
-
-        // カメラに設定していたorthographicSizeを実機との対比でスケール
-        float deviceSize = mainCamera.orthographicSize;
-        // scaleの逆数
-        float deviceScale = 1.0f / scale;
-        // orthographicSizeを計算し直す
-        mainCamera.orthographicSize = deviceSize * deviceScale;
-
-    }
-
-    public void OnStart()
-    {
-
+        vecFromPlayerToCamera = transform.position - playerPos;
     }
 
     public void OnUpdate()
     {
 
+    }
+
+    public void FollowTarget(Vector3 playerPos)
+    {
+        transform.position = playerPos + vecFromPlayerToCamera;
+    }
+
+
+    /*! 
+     @brief 焦点距離(FocalLength)を求める
+     @param[in]		fov			視野角(FieldOfView)
+     @param[in]		aperture	画面幅いっぱいに表示したいオブジェクトの幅
+     @return        焦点距離(FocalLength)
+    */
+    float focalLength(float fov, float aperture)
+    {
+        // FieldOfViewを2で割り、三角関数用にラジアンに変換しておく
+        float nHalfTheFOV = fov / 2.0f * Mathf.Deg2Rad;
+
+        // FocalLengthを求める
+        float nFocalLength = (0.5f / (Mathf.Tan(nHalfTheFOV) / aperture));
+
+        // Unityちゃんは画面高さ(Vertical)なFOVなので画面アスペクト比(縦/横)を掛けとく
+        nFocalLength *= ((float)Screen.height / (float)Screen.width);
+
+        return nFocalLength;
     }
 }
