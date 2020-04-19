@@ -1,14 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+
+public enum NPCState
+{
+    Wandering,
+    Following,
+}
 
 public class NPCController : MonoBehaviour
 {
     Rigidbody rb;
     float timer;
     Vector3 walkVec;
-    float walkSpeed = 10f;
+    float walkSpeed = 1f;
     float timeLimit;
+    NPCState nPCState;
+    NavMeshAgent agent;
+    Transform targetTF;
+    Charactor charactor;
     public void OnStart()
     {
         rb = GetComponent<Rigidbody>();
@@ -16,10 +27,34 @@ public class NPCController : MonoBehaviour
         int z = Random.Range(-10, 10);
         walkVec = new Vector3(x, 0, z);
         timeLimit = Random.Range(1, 6);
+        agent = GetComponent<NavMeshAgent>();
+        nPCState = NPCState.Wandering;
+        charactor = GetComponent<Charactor>();
+
     }
 
-
     public void OnUpdate()
+    {
+        switch (nPCState)
+        {
+            case NPCState.Wandering:
+                Wandering();
+                break;
+            case NPCState.Following:
+                Following();
+                break;
+            default:
+                break;
+        }
+    }
+
+    void Following()
+    {
+        if (targetTF == null) { return; }
+        agent.SetDestination(targetTF.position);
+    }
+
+    void Wandering()
     {
         timer += Time.deltaTime;
         if (timer > timeLimit)
@@ -38,10 +73,17 @@ public class NPCController : MonoBehaviour
         rb.velocity = vel;
     }
 
-
-
-    public static float Vector2ToDegree(Vector2 vec)
+    float Vector2ToDegree(Vector2 vec)
     {
         return Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
+    }
+
+    public void SetTarget(Transform targetTF)
+    {
+        if (nPCState == NPCState.Following) { return; }
+        this.targetTF = targetTF;
+        nPCState = NPCState.Following;
+        Debug.Log(name);
+        rb.isKinematic = true;
     }
 }

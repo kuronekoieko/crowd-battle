@@ -5,14 +5,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    float walkSpeed = 10f;
+    float walkSpeed = 5f;
     Vector3 mouseDownPos;
     Vector3 walkVec;
     Rigidbody rb;
-
+    Charactor charactor;
     public void OnStart()
     {
         rb = GetComponent<Rigidbody>();
+        charactor = GetComponent<Charactor>();
+        //charactor.EnableScript();
     }
 
     public void OnUpdate()
@@ -63,5 +65,11 @@ public class PlayerController : MonoBehaviour
         return Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
     }
 
+    void OnCollisionEnter(Collision col)
+    {
+        var npc = col.gameObject.GetComponent<NPCController>();
+        if (npc == null) { return; }
+        npc.SetTarget(targetTF: transform);
+    }
 
 }

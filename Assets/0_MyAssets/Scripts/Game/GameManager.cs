@@ -7,15 +7,16 @@ using UnityEngine;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] PlayerController _playerController;
+    [SerializeField] Charactor player;
     [SerializeField] CameraController _cameraController;
     [SerializeField] Transform fieldCornerUR;
     [SerializeField] Transform fieldCornerLL;
     [SerializeField] Charactor charactorPrefab;
     NPCController[] nPCControllers;
-
+    PlayerController _playerController;
     void Start()
     {
+        _playerController = player.gameObject.AddComponent<PlayerController>();
         _playerController.OnStart();
         _cameraController.OnStart(_playerController.transform.position);
         WanderingGenerator();
@@ -33,11 +34,12 @@ public class GameManager : MonoBehaviour
 
     void WanderingGenerator()
     {
-        nPCControllers = new NPCController[1000];
+        nPCControllers = new NPCController[100];
         for (int i = 0; i < nPCControllers.Length; i++)
         {
             Vector3 pos = GetRandomPos();
-            nPCControllers[i] = Instantiate(charactorPrefab, pos, Quaternion.identity, transform).GetComponent<NPCController>();
+            var charactor = Instantiate(charactorPrefab, pos, Quaternion.identity, transform);
+            nPCControllers[i] = charactor.gameObject.AddComponent<NPCController>();
             nPCControllers[i].OnStart();
         }
     }
