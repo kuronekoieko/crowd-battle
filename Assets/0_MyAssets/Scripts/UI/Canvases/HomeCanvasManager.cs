@@ -16,9 +16,9 @@ public class HomeCanvasManager : BaseCanvasManager
         startButton.onClick.AddListener(OnClickStartButton);
     }
 
-    public override void OnUpdate(ScreenState currentScreen)
+    public override void OnUpdate()
     {
-        if (currentScreen != thisScreen) { return; }
+        if (Variables.screenState != thisScreen) { return; }
 
     }
 

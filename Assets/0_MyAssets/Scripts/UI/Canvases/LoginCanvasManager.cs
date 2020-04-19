@@ -53,10 +53,9 @@ public class LoginCanvasManager : BaseCanvasManager
             bonusCountTexts[i].rectTransform.eulerAngles = new Vector3(0, 0, deltaDegree + 90);
         }
     }
-
-    public override void OnUpdate(ScreenState currentScreen)
+    public override void OnUpdate()
     {
-        if (currentScreen != thisScreen) { return; }
+        if (Variables.screenState != thisScreen) { return; }
 
     }
 

@@ -33,7 +33,7 @@ public class BaseCanvasManager : MonoBehaviour
     {
     }
 
-    public virtual void OnUpdate(ScreenState currentScreen)
+    public virtual void OnUpdate()
     {
     }
 
@@ -49,6 +49,11 @@ public class BaseCanvasManager : MonoBehaviour
     /// </summary>
     protected virtual void OnClose()
     {
+    }
+
+    protected void OnInitialize()
+    {
+
     }
 
     /*
