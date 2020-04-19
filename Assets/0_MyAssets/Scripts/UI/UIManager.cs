@@ -22,11 +22,33 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
+        if (Variables.screenState == ScreenState.INITIALIZE)
+        {
+            Initialize();
+        }
+        else
+        {
+            OnUpdate();
+        }
+    }
+
+    void OnUpdate()
+    {
         for (int i = 0; i < canvases.Length; i++)
         {
             if (canvases[i] == null) { continue; }
             canvases[i].OnUpdate();
         }
-
     }
+
+    void Initialize()
+    {
+        for (int i = 0; i < canvases.Length; i++)
+        {
+            if (canvases[i] == null) { continue; }
+            canvases[i].OnInitialize();
+        }
+        Variables.screenState = ScreenState.GAME;
+    }
+
 }

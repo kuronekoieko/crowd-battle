@@ -51,7 +51,7 @@ public class BaseCanvasManager : MonoBehaviour
     {
     }
 
-    protected void OnInitialize()
+    public void OnInitialize()
     {
 
     }
