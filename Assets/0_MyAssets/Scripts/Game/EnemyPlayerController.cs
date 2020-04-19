@@ -40,4 +40,11 @@ public class EnemyPlayerController : MonoBehaviour
         return Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
     }
 
+    void OnCollisionEnter(Collision col)
+    {
+        var npc = col.gameObject.GetComponent<NPCController>();
+        if (npc == null) { return; }
+        npc.SetTarget(targetTF: transform);
+    }
+
 }
