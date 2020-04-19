@@ -16,7 +16,7 @@ public class NPCController : MonoBehaviour
     Vector3 walkVec;
     float walkSpeed = 1f;
     float timeLimit;
-    NPCState nPCState;
+    public NPCState nPCState { get; private set; }
     NavMeshAgent agent;
     Transform targetTF;
     Charactor charactor;
