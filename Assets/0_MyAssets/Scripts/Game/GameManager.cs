@@ -9,11 +9,10 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] PlayerController _playerController;
     [SerializeField] CameraController _cameraController;
-
     [SerializeField] Transform fieldCornerUR;
     [SerializeField] Transform fieldCornerLL;
-    [SerializeField] PlayerController wanderingPlayerPrefab;
-    PlayerController[] wanderingPlayers;
+    [SerializeField] Charactor charactorPrefab;
+    Charactor[] wanderingPlayers;
 
     void Start()
     {
@@ -24,18 +23,18 @@ public class GameManager : MonoBehaviour
 
     void FixedUpdate()
     {
-
+        _playerController.OnUpdate();
         _cameraController.FollowTarget(_playerController.transform.position);
     }
 
     void WanderingGenerator()
     {
-        wanderingPlayers = new PlayerController[100];
+        wanderingPlayers = new Charactor[100];
         for (int i = 0; i < wanderingPlayers.Length; i++)
         {
             Vector3 pos = GetRandomPos();
-            wanderingPlayers[i] = Instantiate(wanderingPlayerPrefab, pos, Quaternion.identity, transform);
-            wanderingPlayers[i].OnStart();
+            wanderingPlayers[i] = Instantiate(charactorPrefab, pos, Quaternion.identity, transform);
+            wanderingPlayers[i].OnStart(charactorType: CharactorType.Wandering);
         }
     }
 

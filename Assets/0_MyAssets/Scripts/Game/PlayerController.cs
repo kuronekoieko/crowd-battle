@@ -3,20 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum PlayerType
-{
-    Player,
-    EnemyPlayer,
-    Wandering,
-    Following,
-}
-
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] Animator animator;
     float walkSpeed = 10f;
-    Vector3 walkVec;
     Vector3 mouseDownPos;
+    Vector3 walkVec;
     Rigidbody rb;
 
     public void OnStart()
@@ -24,13 +15,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-
-    void Update()
-    {
-
-    }
-
-    void FixedUpdate()
+    public void OnUpdate()
     {
         Controller();
         SetVelocityFromWalkVec();
@@ -77,4 +62,6 @@ public class PlayerController : MonoBehaviour
     {
         return Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
     }
+
+
 }
